@@ -2,7 +2,7 @@
 #define	CAMERA_H
 
 #include "math_3d.h"
-#include "math_3d.cpp"
+
 
 class Camera
 {

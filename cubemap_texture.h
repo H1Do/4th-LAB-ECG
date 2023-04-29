@@ -16,31 +16,38 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TEXTURE_H
-#define	TEXTURE_H
+#ifndef CUBEMAP_H
+#define	CUBEMAP_H
 
 #include <string>
-
 #include <GL/glew.h>
 #include <Magick++.h>
 
-class Texture
+using namespace std;
+
+class CubemapTexture
 {
 public:
-    Texture(GLenum TextureTarget, const std::string& FileName);
+    
+    CubemapTexture(const string& Directory,
+                   const string& PosXFilename,
+                   const string& NegXFilename,
+                   const string& PosYFilename,
+                   const string& NegYFilename,
+                   const string& PosZFilename,
+                   const string& NegZFilename);
 
+    ~CubemapTexture();
+    
     bool Load();
 
     void Bind(GLenum TextureUnit);
 
 private:
-    std::string m_fileName;
-    GLenum m_textureTarget;
+   
+    string m_fileNames[6];
     GLuint m_textureObj;
-    Magick::Image* m_pImage;
-    Magick::Blob m_blob;
 };
 
-
-#endif	/* TEXTURE_H */
+#endif	/* CUBEMAP_H */
 

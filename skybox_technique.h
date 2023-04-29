@@ -1,6 +1,5 @@
 /*
-
-	Copyright 2011 Etay Meiri
+        Copyright 2011 Etay Meiri
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,31 +15,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TEXTURE_H
-#define	TEXTURE_H
+#ifndef SKYBOX_TECHNIQUE_H
+#define	SKYBOX_TECHNIQUE_H
 
-#include <string>
+#include "technique.h"
+#include "math_3d.h"
 
-#include <GL/glew.h>
-#include <Magick++.h>
 
-class Texture
-{
+class SkyboxTechnique : public Technique {
 public:
-    Texture(GLenum TextureTarget, const std::string& FileName);
 
-    bool Load();
+    SkyboxTechnique();
 
-    void Bind(GLenum TextureUnit);
+    virtual bool Init();
+
+    void SetWVP(const Matrix4f& WVP);
+    void SetTextureUnit(unsigned int TextureUnit);
+
+    virtual ~SkyboxTechnique();
 
 private:
-    std::string m_fileName;
-    GLenum m_textureTarget;
-    GLuint m_textureObj;
-    Magick::Image* m_pImage;
-    Magick::Blob m_blob;
+
+    GLuint m_WVPLocation;
+    GLuint m_textureLocation;
 };
 
 
-#endif	/* TEXTURE_H */
-
+#endif	/* SKYBOX_TECHNIQUE_H */
